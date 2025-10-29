@@ -14,6 +14,7 @@ $result = $conn->query($sql);
 </head>
 <body>
     <h1>Lista de Remédios</h1>
+    <br><br>
     <table border="1" style="margin:auto;">
         <tr>
             <th>ID</th>

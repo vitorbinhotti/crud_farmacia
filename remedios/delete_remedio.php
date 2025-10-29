@@ -7,7 +7,10 @@ if (isset($_GET['id'])) {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $id);
     if ($stmt->execute()) {
-        echo "<p>Remédio excluído com sucesso!</p>";
+        echo "
+        <div class='mensagem-sucesso'>
+        <p>Remédio excluído com sucesso!</p>
+        </div>";
     } else {
         echo "<p>Erro ao excluir: " . $conn->error . "</p>";
     }
@@ -25,6 +28,7 @@ $result = $conn->query($sql);
 </head>
 <body>
     <h1>Excluir Remédio</h1>
+    <br><br>
     <table border="1" style="margin:auto;">
         <tr>
             <th>ID</th>

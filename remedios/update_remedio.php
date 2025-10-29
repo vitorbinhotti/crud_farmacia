@@ -36,26 +36,28 @@ if (isset($_GET['id'])) {
 
 <body>
     <h1>Atualizar Remédio</h1>
+    <br><br>
     <?php if (isset($remedio)): ?>
         <form method="post">
-            <label>Nome:</label>
             <label>Nome:</label>
             <input type="text" name="nome" value="<?= htmlspecialchars($remedio['nome']) ?>" required><br><br>
 
             <label>Preço:</label>
             <input type="text" name="preco" value="<?= htmlspecialchars($remedio['preco']) ?>" required><br><br>
 
+            <label>Código:</label>
             <select name="codigo" required>
-                <option value="TIPO A">TIPO A</option>
-                <option value="TIPO B">TIPO B</option>
-                <option value="TIPO C">TIPO C</option>
+                <option value="TIPO A" <?= $remedio['codigo'] == 'TIPO A' ? 'selected' : '' ?>>TIPO A</option>
+                <option value="TIPO B" <?= $remedio['codigo'] == 'TIPO B' ? 'selected' : '' ?>>TIPO B</option>
+                <option value="TIPO C" <?= $remedio['codigo'] == 'TIPO C' ? 'selected' : '' ?>>TIPO C</option>
             </select><br><br>
 
+            <label>Tipo:</label>
             <select name="tipo" required>
-                <option value="Comprimido">Comprimido</option>
-                <option value="Xarope">Xarope</option>
-                <option value="Pomada">Pomada</option>
-                <option value="Injeção">Injeção</option>
+                <option value="Comprimido" <?= $remedio['tipo'] == 'Comprimido' ? 'selected' : '' ?>>Comprimido</option>
+                <option value="Xarope" <?= $remedio['tipo'] == 'Xarope' ? 'selected' : '' ?>>Xarope</option>
+                <option value="Pomada" <?= $remedio['tipo'] == 'Pomada' ? 'selected' : '' ?>>Pomada</option>
+                <option value="Injeção" <?= $remedio['tipo'] == 'Injeção' ? 'selected' : '' ?>>Injeção</option>
             </select><br><br>
 
             <label>Estoque:</label>
