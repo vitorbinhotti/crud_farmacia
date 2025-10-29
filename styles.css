@@ -1,4 +1,63 @@
 body {
-    background-image: url(images/imagem-farmacia.jpg) no-repeat center center fixed;
+    background-image: url(images/imagem-farmacia.png);
     background-size: cover;
+    max-width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.card {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 75px;
+    text-align: center;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+    width: fit-content;
+    border-radius: 8px;
+    padding: 18px;
+    align-self: center;
+}
+
+.links a:hover {
+    background-color: aqua;
+    color: #007BFF;
+}
+
+h1  {
+    text-align: center;
+    background-color: #ccc;
+    padding: 10px;
+    border-radius: 18px;
+    margin: 0 auto;
+    width: 50%;
+    margin-top: 20px;
+    color: #333;
+}
+
+.card h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+form {
+    background-color: #ccc;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
 }
