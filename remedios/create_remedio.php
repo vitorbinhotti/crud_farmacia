@@ -22,11 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Remédio</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../reset.css">
 </head>
+
 <body>
     <h1>Cadastrar Remédio</h1>
     <form method="post">
@@ -42,12 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="Xarope">Xarope</option>
             <option value="Pomada">Pomada</option>
             <option value="Injeção">Injeção</option>
-        </select><br>
-        <input type="number" name="estoque" placeholder="Estoque" required><br>
-        <input type="date" name="validade" required><br>
+        </select><br><br>
+        <input type="number" name="estoque" placeholder="Estoque" required>
+        <div>
+            <p>Validade</p>
+            <input type="date" name="validade" required>
+        </div><br>
         <input type="text" name="laboratorio" placeholder="Laboratório" required><br>
         <button type="submit">Cadastrar</button>
     </form>
     <a href="../index.php">Voltar</a>
 </body>
+
 </html>

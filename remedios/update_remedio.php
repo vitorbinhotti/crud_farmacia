@@ -1,9 +1,21 @@
 <?php
-// Página para atualizar remédio
 require_once '../banco-de-dados/db.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $nome = $_POST['nome'];
+        $sql = "UPDATE remedios SET nome=? WHERE id=?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('si', $nome, $id);
+        if ($stmt->execute()) {
+            echo "<p>Remédio atualizado com sucesso!</p>";
+        } else {
+            echo "<p>Erro ao atualizar: " . $conn->error . "</p>";
+        }
+    }
+
     $sql = "SELECT * FROM remedios WHERE id=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $id);
@@ -11,55 +23,75 @@ if (isset($_GET['id'])) {
     $result = $stmt->get_result();
     $remedio = $result->fetch_assoc();
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'];
-    $nome = $_POST['nome'];
-    $preco = $_POST['preco'];
-    $codigo = $_POST['codigo'];
-    $tipo = $_POST['tipo'];
-    $estoque = $_POST['estoque'];
-    $validade = $_POST['validade'];
-    $laboratorio = $_POST['laboratorio'];
-    $sql = "UPDATE remedios SET nome=?, preco=?, codigo=?, tipo=?, estoque=?, validade=?, laboratorio=? WHERE id=?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('sdssissi', $nome, $preco, $codigo, $tipo, $estoque, $validade, $laboratorio, $id);
-    if ($stmt->execute()) {
-        echo "<p>Remédio atualizado com sucesso!</p>";
-    } else {
-        echo "<p>Erro ao atualizar: " . $conn->error . "</p>";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Atualizar Remédio</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../reset.css">
 </head>
+
 <body>
     <h1>Atualizar Remédio</h1>
-    <form method="post">
-        <input type="hidden" name="id" value="<?= $remedio['id'] ?? '' ?>">
-        <input type="text" name="nome" placeholder="Nome" value="<?= $remedio['nome'] ?? '' ?>" required><br>
-        <input type="number" step="0.01" name="preco" placeholder="Preço" value="<?= $remedio['preco'] ?? '' ?>" required><br>
-        <select name="codigo" required>
-            <option value="TIPO A" <?= (isset($remedio) && $remedio['codigo']=='TIPO A')?'selected':'' ?>>TIPO A</option>
-            <option value="TIPO B" <?= (isset($remedio) && $remedio['codigo']=='TIPO B')?'selected':'' ?>>TIPO B</option>
-            <option value="TIPO C" <?= (isset($remedio) && $remedio['codigo']=='TIPO C')?'selected':'' ?>>TIPO C</option>
-        </select><br>
-        <select name="tipo" required>
-            <option value="Comprimido" <?= (isset($remedio) && $remedio['tipo']=='Comprimido')?'selected':'' ?>>Comprimido</option>
-            <option value="Xarope" <?= (isset($remedio) && $remedio['tipo']=='Xarope')?'selected':'' ?>>Xarope</option>
-            <option value="Pomada" <?= (isset($remedio) && $remedio['tipo']=='Pomada')?'selected':'' ?>>Pomada</option>
-            <option value="Injeção" <?= (isset($remedio) && $remedio['tipo']=='Injeção')?'selected':'' ?>>Injeção</option>
-        </select><br>
-        <input type="number" name="estoque" placeholder="Estoque" value="<?= $remedio['estoque'] ?? '' ?>" required><br>
-        <input type="date" name="validade" value="<?= $remedio['validade'] ?? '' ?>" required><br>
-        <input type="text" name="laboratorio" placeholder="Laboratório" value="<?= $remedio['laboratorio'] ?? '' ?>" required><br>
-        <button type="submit">Atualizar</button>
-    </form>
+    <?php if (isset($remedio)): ?>
+        <form method="post">
+            <label>Nome:</label>
+            <label>Nome:</label>
+            <input type="text" name="nome" value="<?= htmlspecialchars($remedio['nome']) ?>" required><br><br>
+
+            <label>Preço:</label>
+            <input type="text" name="preco" value="<?= htmlspecialchars($remedio['preco']) ?>" required><br><br>
+
+            <select name="codigo" required>
+                <option value="TIPO A">TIPO A</option>
+                <option value="TIPO B">TIPO B</option>
+                <option value="TIPO C">TIPO C</option>
+            </select><br><br>
+
+            <select name="tipo" required>
+                <option value="Comprimido">Comprimido</option>
+                <option value="Xarope">Xarope</option>
+                <option value="Pomada">Pomada</option>
+                <option value="Injeção">Injeção</option>
+            </select><br><br>
+
+            <label>Estoque:</label>
+            <input type="number" name="estoque" value="<?= htmlspecialchars($remedio['estoque']) ?>" required><br><br>
+            <button type="submit">Salvar</button>
+        </form>
+    <?php else: ?>
+        <table border="1" style="margin:auto;">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Código</th>
+                <th>Tipo</th>
+                <th>Estoque</th>
+                <th>Ação</th>
+            </tr>
+            <?php
+            $sql = "SELECT * FROM remedios";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()):
+            ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= $row['nome'] ?></td>
+                    <td><?= $row['preco'] ?></td>
+                    <td><?= $row['codigo'] ?></td>
+                    <td><?= $row['tipo'] ?></td>
+                    <td><?= $row['estoque'] ?></td>
+                    <td><a href="?id=<?= $row['id'] ?>">Atualizar</a></td>
+                </tr>
+            <?php endwhile; ?>
+        </table>
+    <?php endif; ?>
+    <br>
     <a href="../index.php">Voltar</a>
 </body>
+
 </html>

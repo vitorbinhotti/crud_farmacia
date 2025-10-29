@@ -1,5 +1,4 @@
 <?php
-// Página para excluir remédio
 require_once '../banco-de-dados/db.php';
 
 if (isset($_GET['id'])) {
@@ -13,7 +12,6 @@ if (isset($_GET['id'])) {
         echo "<p>Erro ao excluir: " . $conn->error . "</p>";
     }
 }
-// Listar todos para escolher qual excluir
 $sql = "SELECT * FROM remedios";
 $result = $conn->query($sql);
 ?>
@@ -23,6 +21,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Excluir Remédio</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../reset.css">
 </head>
 <body>
     <h1>Excluir Remédio</h1>

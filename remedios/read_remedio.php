@@ -10,6 +10,7 @@ $result = $conn->query($sql);
     <meta charset="UTF-8">
     <title>Lista de Remédios</title>
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../reset.css">
 </head>
 <body>
     <h1>Lista de Remédios</h1>

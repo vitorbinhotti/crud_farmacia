@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Farmácia - CRUD</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="reset.css">
 </head>
 <body>
     <h1>💉 Sistema de Farmácia - CRUD</h1>
+
     <div class="menu">
 
         <div class="card">
