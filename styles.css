@@ -70,3 +70,22 @@ form {
     width: fit-content;
     margin: 20px auto;
 }
+
+.voltar-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.voltar-link a {
+    text-decoration: none;
+    color: #333;
+    font-size: 18px;
+    border-radius: 8px;
+    padding: 10px 20px;
+    border: 1px solid #333;
+}
+
+.voltar-link a:hover {
+    background-color: aqua;
+    color: #007BFF;
+}

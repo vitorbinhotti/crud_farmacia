@@ -6,11 +6,18 @@ if (isset($_GET['id'])) {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nome = $_POST['nome'];
-        $sql = "UPDATE remedios SET nome=? WHERE id=?";
+        $preco = $_POST['preco'];
+        $codigo = $_POST['codigo'];
+        $tipo = $_POST['tipo'];
+        $estoque = $_POST['estoque'];
+        $sql = "UPDATE remedios SET nome=?, preco=?, codigo=?, tipo=?, estoque=? WHERE id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('si', $nome, $id);
+        $stmt->bind_param('sdssii', $nome, $preco, $codigo, $tipo, $estoque, $id);
         if ($stmt->execute()) {
-            echo "<p>Remédio atualizado com sucesso!</p>";
+            echo "
+            <div class='mensagem-sucesso'>
+            <p>Remédio atualizado com sucesso!</p>
+            </div>";
         } else {
             echo "<p>Erro ao atualizar: " . $conn->error . "</p>";
         }
@@ -93,7 +100,9 @@ if (isset($_GET['id'])) {
         </table>
     <?php endif; ?>
     <br>
-    <a href="../index.php">Voltar</a>
+    <div class="voltar-link">
+        <a href="../index.php">Voltar</a>
+    </div>
 </body>
 
 </html>

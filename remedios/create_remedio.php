@@ -14,7 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('sdssiss', $nome, $preco, $codigo, $tipo, $estoque, $validade, $laboratorio);
     if ($stmt->execute()) {
-        echo "<p>Remédio cadastrado com sucesso!</p>";
+        echo "
+        <div class='mensagem-sucesso'>
+        <p>Remédio cadastrado com sucesso!</p>
+        </div>";
     } else {
         echo "<p>Erro ao cadastrar: " . $conn->error . "</p>";
     }
@@ -55,7 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="laboratorio" placeholder="Laboratório" required><br>
         <button type="submit">Cadastrar</button>
     </form>
-    <a href="../index.php">Voltar</a>
+    <div class="voltar-link">
+        <a href="../index.php">Voltar</a>
+    </div>
 </body>
 
 </html>
