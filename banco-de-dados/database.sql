@@ -1,35 +1,20 @@
-create database biblioteca_db;
-use biblioteca_db;
+create database farmacia_db;
+use farmacia_db;
 
-create table autores (
-	id_autores int auto_increment primary key,
-	nome varchar(100) not null,
-	nacionalidade varchar(85) not null,
-	ano_nascimento year not null
-)
+CREATE TABLE remedios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
+    codigo ENUM('TIPO A', 'TIPO B', 'TIPO C') NOT NULL DEFAULT 'TIPO A',
+    tipo ENUM('Comprimido', 'Xarope', 'Pomada', 'Injeção') NOT NULL DEFAULT 'Comprimido',
+    estoque INT NOT NULL,
+    validade DATE NOT NULL,
+    laboratorio VARCHAR(100) NOT NULL
+);
 
-create table livros (
-	id_livro int AUTO_INCREMENT PRIMARY KEY,
-    titulo varchar(100) not null,
-    genero varchar(85) not null,
-    ano_publicacao year not null,
-    fk_autor int not null,
-    FOREIGN KEY (fk_autor) REFERENCES autores (id_autores)
-)
-
-create table leitores (
-	id_leitores int not null AUTO_INCREMENT PRIMARY KEY,
-    nome varchar(100) not null,
-    email varchar(85) not null,
-    telefone varchar(85) not null
-)
-
-create table emprestimos (
-	id_emprestimos int not null AUTO_INCREMENT PRIMARY KEY,
-    data_emprestimo date not null,
-    data_devolucao date not null,
-    fk_livros int not null,
-    fk_leitores int not null,
-    FOREIGN KEY (fk_livros) REFERENCES livros (id_livro),
-    FOREIGN KEY (fk_leitores) REFERENCES leitores (id_leitores)
-)
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(255) NOT NULL
+);
