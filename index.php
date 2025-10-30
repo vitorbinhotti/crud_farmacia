@@ -34,6 +34,7 @@ if (isset($_GET['logout'])) {
     <title>Farmácia - CRUD</title>
     <link rel="stylesheet" href="./reset.css">
     <link rel="stylesheet" href="./styles.css">
+    <link rel="shortcut icon" href="./images/icon/seringa.png">
 </head>
 
 <body class="<?php echo empty($_SESSION['logado']) ? 'login-bg' : ''; ?>">
