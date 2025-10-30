@@ -45,6 +45,7 @@ if (isset($_GET['id'])) {
     <h1>Atualizar Remédio</h1>
     <br><br>
     <?php if (isset($remedio)): ?>
+        <div class="update-form">
         <form method="post">
             <label>Nome:</label>
             <input type="text" name="nome" value="<?= htmlspecialchars($remedio['nome']) ?>" required><br><br>
@@ -71,6 +72,7 @@ if (isset($_GET['id'])) {
             <input type="number" name="estoque" value="<?= htmlspecialchars($remedio['estoque']) ?>" required><br><br>
             <button type="submit">Salvar</button>
         </form>
+        </div>
     <?php else: ?>
         <table border="1" style="margin:auto;">
             <tr>

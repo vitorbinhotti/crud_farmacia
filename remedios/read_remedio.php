@@ -1,9 +1,16 @@
 <?php
-// Página para listar remédios
 require_once '../banco-de-dados/db.php';
 $sql = "SELECT * FROM remedios";
 $result = $conn->query($sql);
+
+$nome = $_GET['nome'] ?? '';
+
+$sql = "SELECT * FROM remedios WHERE 1=1";
+if ($nome) $sql .= " AND nome LIKE '%" . $conn->real_escape_string($nome) . "%'";
+
+$result = $conn->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,6 +24,15 @@ $result = $conn->query($sql);
 <body>
     <h1>Lista de Remédios</h1>
     <br><br>
+
+    <div class="filtro-form">
+        <form method="get">
+            🔎<input type="text" name="nome" value"<?= $nome ?>">
+            <button type="submit">Filtrar</button>
+            <a href="read_remedio.php">Limpar</a>
+        </form>
+    </div>
+
     <table border="1" style="margin:auto;">
         <tr>
             <th>ID</th>
